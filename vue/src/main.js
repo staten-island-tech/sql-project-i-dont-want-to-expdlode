@@ -12,3 +12,12 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('#app')
+
+import { defineStore } from 'pinia'
+
+export const userSessionStore = defineStore({
+  id: 'userSession',
+  state: () => ({
+    session: null
+  })
+})
