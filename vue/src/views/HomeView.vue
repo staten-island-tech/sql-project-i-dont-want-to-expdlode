@@ -1,6 +1,10 @@
-<script>
+<script setup>
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
-export const useMovieStore = defineStore('movies', {})
+const currentUser = ref(null)
+function useCurrentUser() {}
+const useCurrentUserStore = defineStore(currentUser, useCurrentUser)
+console.log(useCurrentUserStore)
 </script>
 //view = declarative rendering of the state, getters = computed properties , //actions = asynchronus
 operations and ways to change the state,//state = what is stored to influence the view //State
