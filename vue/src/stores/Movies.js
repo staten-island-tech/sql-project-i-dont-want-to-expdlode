@@ -1,3 +1,7 @@
-const supabase = ['Disney']
+const movies = [
+  {
+    name: 'Disney'
+  }
+]
 
-export { supabase }
+export { movies }
