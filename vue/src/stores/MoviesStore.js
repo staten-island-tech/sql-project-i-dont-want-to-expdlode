@@ -8,7 +8,7 @@ export const useMovieStores = defineStore('MovieStore', {
   },
   actions: {
     async fill() {
-      this.supabase = (await import('@')).default
+      this.supabase = (await import('./Movies')).default
     }
   }
 })

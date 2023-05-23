@@ -1,3 +1,13 @@
+<template>
+  <div></div>
+</template>
+
+<script>
+export default {}
+</script>
+
+<style lang="scss" scoped></style>
+<!-- */
 <script>
 import { ref } from 'vue'
 import { supabase } from '../supabase/init'
@@ -67,3 +77,4 @@ export default {
     </form>
   </div>
 </template>
+ -->
