@@ -1,17 +1,11 @@
-<template>
-  <div></div>
-</template>
-
-<script>
-export default {}
-</script>
-
 <style lang="scss" scoped></style>
-<!-- */
+*/
 <script>
 import { ref } from 'vue'
-import { supabase } from '../supabase/init'
+import { supabase } from '../supabase'
 import { useRouter } from 'vue-router'
+import { useMovieStores } from '../stores/MoviesStore'
+
 export default {
   name: 'LoginLogout',
   setup() {
@@ -21,6 +15,7 @@ export default {
     const password = ref(null)
     const confirmPassword = ref(null)
     const errorMsg = ref(null)
+    const store = useMovieStores()
     // Register function
     const register = async () => {
       if (password.value === confirmPassword.value) {
@@ -44,13 +39,36 @@ export default {
         errorMsg.value = null
       }, 5000)
     }
+    async function signInWithEmail() {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.value,
+        password: password.value
+      })
+      store.$patch({
+        email: email.value,
+        password: password.value
+      })
+    }
     return { email, password, confirmPassword, errorMsg, register }
   }
 }
 </script>
 
 <template>
-  <h1>Login</h1>
+  <form @submit.prevent="signInWithEmail">
+    <h1>Login</h1>
+    <div class="">
+      <label for="email" class="">Email</label>
+      <input type="text" required class="" id="email" v-model="email" />
+    </div>
+
+    <div class="">
+      <label for="password" class="">Password</label>
+      <input type="password" required class="" id="password" v-model="password" />
+    </div>
+    <button type="submit" class="">Login</button>
+  </form>
+
   <div v-if="errorMsg">
     <p>{{ errorMsg }}</p>
   </div>
@@ -77,4 +95,3 @@ export default {
     </form>
   </div>
 </template>
- -->
