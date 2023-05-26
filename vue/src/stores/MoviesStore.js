@@ -4,12 +4,8 @@ export const useMovieStores = defineStore('MovieStore', {
   state: () => {
     return {
       supabase: [],
-      login: [
-        {
-          email: '',
-          password: ''
-        }
-      ]
+      email: null,
+      password: null
     }
   },
   actions: {

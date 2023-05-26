@@ -1,5 +1,4 @@
 <style lang="scss" scoped></style>
-*/
 <script>
 import { ref } from 'vue'
 import { supabase } from '../supabase'
@@ -13,33 +12,8 @@ export default {
     const router = useRouter()
     const email = ref(null)
     const password = ref(null)
-    const confirmPassword = ref(null)
-    const errorMsg = ref(null)
     const store = useMovieStores()
-    // Register function
-    const register = async () => {
-      if (password.value === confirmPassword.value) {
-        try {
-          const { error } = await supabase.auth.signUp({
-            email: email.value,
-            password: password.value
-          })
-          if (error) throw error
-          router.push({ name: 'Login' })
-        } catch (error) {
-          errorMsg.value = error.message
-          setTimeout(() => {
-            errorMsg.value = null
-          }, 5000)
-        }
-        return
-      }
-      errorMsg.value = 'Error: Passwords do not match'
-      setTimeout(() => {
-        errorMsg.value = null
-      }, 5000)
-    }
-    async function signInWithEmail() {
+    const signInWithEmail = async () => {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email.value,
         password: password.value
@@ -49,7 +23,11 @@ export default {
         password: password.value
       })
     }
-    return { email, password, confirmPassword, errorMsg, register }
+    const signOut = async () => {
+      let { error } = await supabase.auth.signOut()
+      store.$reset()
+    }
+    return { email, password, signInWithEmail, signOut }
   }
 }
 </script>
@@ -68,30 +46,4 @@ export default {
     </div>
     <button type="submit" class="">Login</button>
   </form>
-
-  <div v-if="errorMsg">
-    <p>{{ errorMsg }}</p>
-  </div>
-  <div>
-    <form @submit.prevent="register" class="">
-      <h1 class="">Register</h1>
-
-      <div class="">
-        <label for="email" class="">Email</label>
-        <input type="text" required class="" id="email" v-model="email" />
-      </div>
-
-      <div class="">
-        <label for="password" class="">Password</label>
-        <input type="password" required class="" id="password" v-model="password" />
-      </div>
-
-      <div class="">
-        <label for="confirmPassword" class="">Confirm Password</label>
-        <input type="password" required class="" id="confirmPassword" v-model="confirmPassword" />
-      </div>
-
-      <button type="submit" class="">Register</button>
-    </form>
-  </div>
 </template>
