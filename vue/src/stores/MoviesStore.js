@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 export const useMovieStores = defineStore('MovieStore', {
   state: () => {
     return {
-      supabase: [],
+      supabase: null,
       email: null,
       password: null
     }
