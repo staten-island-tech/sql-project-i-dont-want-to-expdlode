@@ -1,7 +1,19 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import TableStuff from './views/TableStuff.vue'
+import { supabase } from './supabase'
+import { useMovieStores } from './stores/MoviesStore'
+const store = useMovieStores()
+async function readStores() {
+  let { data: Movies, error } = await supabase.from('Movies').select('*')
+
+  store.$patch((state) => {
+    state.supabase = Movies
+  })
+
+  if (error) throw new Error(error)
+}
+readStores()
 </script>
 
 <template>
@@ -16,8 +28,8 @@ import TableStuff from './views/TableStuff.vue'
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
         <RouterLink to="/register">Register</RouterLink>
+        <RouterLink to="/table">Data</RouterLink>
       </nav>
-      <TableStuff></TableStuff>
     </div>
   </header>
 

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginLogout from '../views/LoginLogout.vue'
 import RegisterAcc from '../views/RegisterAcc.vue'
+import TableStuff from '../views/TableStuff.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/register',
       name: 'registeracc',
       component: RegisterAcc
+    },
+    {
+      path: '/table',
+      name: 'tables',
+      component: TableStuff
     }
   ]
 })

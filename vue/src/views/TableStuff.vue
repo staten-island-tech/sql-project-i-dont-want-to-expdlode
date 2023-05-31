@@ -1,28 +1,20 @@
 <template>
-  <div v-for="list in lists">
+  <div v-if="load" v-for="list in lists" :key="list.id">
     <h1>{{ list.id }}</h1>
-    <h2></h2>
+    <h2>{{ list.title }}</h2>
+    <h3>{{ list.release }}</h3>
+    <p>{{ list.studio_id }}</p>
   </div>
 </template>
 
 <script setup>
-let lists = ref('')
+let lists = ref(null)
+let load = false
 import { ref } from 'vue'
-import { supabase } from '../supabase'
 import { useMovieStores } from '../stores/MoviesStore'
 const store = useMovieStores()
-async function readStores() {
-  let { data: Movies, error } = await supabase.from('Movies').select('*')
-
-  store.$patch((state) => {
-    state.supabase = Movies
-  })
-
-  if (error) throw new Error(error)
-
-  return (lists = store.supabase)
-}
-readStores()
+lists = store.supabase
+load = true
 </script>
 
 <style scoped></style>
