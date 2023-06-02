@@ -18,10 +18,15 @@ export default {
         email: email.value,
         password: password.value
       })
-      store.$patch({
-        email: email.value,
-        password: password.value
-      })
+      if (error) {
+        alert(error)
+      } else {
+        store.$patch({
+          email: email.value,
+          password: password.value,
+          loggedin: true
+        })
+      }
     }
     const signOut = async () => {
       let { error } = await supabase.auth.signOut()
@@ -46,4 +51,5 @@ export default {
     </div>
     <button type="submit" class="">Login</button>
   </form>
+  <button @click="signOut">Sign Out</button>
 </template>
