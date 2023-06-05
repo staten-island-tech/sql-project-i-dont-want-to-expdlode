@@ -24,7 +24,7 @@ let load = false
 import { ref } from 'vue'
 import { useMovieStores } from '../stores/MoviesStore'
 const store = useMovieStores()
-lists = store.supabase
+lists.value = store.supabase
 load = true
 const remove = async () => {
   // let index = lists.findIndex((el) => el.name === )

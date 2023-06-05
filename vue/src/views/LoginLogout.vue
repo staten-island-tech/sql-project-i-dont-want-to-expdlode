@@ -26,11 +26,13 @@ export default {
           password: password.value,
           loggedin: true
         })
+        console.log(data)
       }
     }
     const signOut = async () => {
       let { error } = await supabase.auth.signOut()
       store.$reset()
+      console.log(error)
     }
     return { email, password, signInWithEmail, signOut }
   }
