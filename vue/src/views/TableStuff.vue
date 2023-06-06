@@ -1,11 +1,12 @@
 <template>
   <div v-if="store.loggedin" class="container">
-    <div id="card" v-if="load" v-for="list in lists" :key="list.id">
-      <h1>{{ list.id }}</h1>
-      <h2>{{ list.title }}</h2>
-      <h3>{{ list.release }}</h3>
-      <button @click="remove">Remove</button>
-    </div>
+    <CardStuff
+      v-for="list in lists"
+      :key="list.id"
+      :id="list.id"
+      :title="list.title"
+      :release="list.release"
+    ></CardStuff>
   </div>
   <div class="invalid" v-else>
     <RouterLink to="/login">Login</RouterLink>
@@ -18,29 +19,18 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { supabase } from '../supabase'
-
-let lists = ref(null)
-let load = false
-import { ref } from 'vue'
 import { useMovieStores } from '../stores/MoviesStore'
+import { ref } from 'vue'
+import CardStuff from '../components/CardStuff.vue'
 const store = useMovieStores()
-lists = store.supabase
-load = true
-const remove = async () => {
-  // let index = lists.findIndex((el) => el.name === )
+let lists = store.supabase
+const remove = () => {
+  // let index = lists.findIndex((el) => el.title === )
   // console.log(index)
 }
 </script>
 
 <style scoped>
-#card {
-  background-color: white;
-  width: 15rem;
-  height: 15rem;
-  margin: 1vh;
-  text-align: center;
-  padding: 5vh;
-}
 .container {
   display: flex;
   flex-wrap: wrap;
