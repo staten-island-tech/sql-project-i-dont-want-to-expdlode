@@ -1,12 +1,15 @@
 <template>
-  <div v-if="store.loggedin" class="container">
-    <CardStuff
-      v-for="list in lists"
-      :key="list.id"
-      :id="list.id"
-      :title="list.title"
-      :release="list.release"
-    ></CardStuff>
+  <div v-if="store.loggedin">
+    <div class="container" v-if="store.supabase !== null && lists !== ''">
+      <CardStuff
+        v-for="list in lists"
+        :key="list.id"
+        :id="list.id"
+        :title="list.title"
+        :release="list.release"
+      ></CardStuff>
+    </div>
+    <div v-else>bleggghhhhhh</div>
   </div>
   <div class="invalid" v-else>
     <RouterLink to="/login">Login</RouterLink>
@@ -20,14 +23,23 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { supabase } from '../supabase'
 import { useMovieStores } from '../stores/MoviesStore'
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import CardStuff from '../components/CardStuff.vue'
 const store = useMovieStores()
-let lists = store.supabase
-const remove = () => {
-  // let index = lists.findIndex((el) => el.title === )
-  // console.log(index)
+let load = false
+let lists = ref('')
+function getlist() {
+  lists = store.supabase
+  load = true
+  return { lists, load }
 }
+onBeforeMount(() => {
+  getlist()
+})
+// const remove = () => {
+//   // let index = lists.findIndex((el) => el.title === )
+//   // console.log(index)
+// }
 </script>
 
 <style scoped>
