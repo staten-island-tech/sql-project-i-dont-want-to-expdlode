@@ -15,6 +15,9 @@ export default {
     const password = ref(null)
     const confirmPassword = ref(null)
     const errorMsg = ref(null)
+    const store = useMovieStores()
+    const list = store.supabase
+    console.log(list)
     // Register function
     const register = async () => {
       if (password.value === confirmPassword.value) {

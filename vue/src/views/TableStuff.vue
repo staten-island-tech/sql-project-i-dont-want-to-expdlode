@@ -1,10 +1,13 @@
 <template>
   <div v-if="store.loggedin" class="container">
-    <div id="card" v-if="load" v-for="list in lists" :key="list.id">
+    <div id="card" v-for="list in lists" :key="list.id">
       <h1>{{ list.id }}</h1>
       <h2>{{ list.title }}</h2>
       <h3>{{ list.release }}</h3>
-      <button @click="remove">Remove</button>
+      <form>
+        <input type="text" />
+        <input type="submit" value="Review" @click="upvote" />
+      </form>
     </div>
   </div>
   <div class="invalid" v-else>
@@ -20,15 +23,13 @@ import { RouterLink, RouterView } from 'vue-router'
 import { supabase } from '../supabase'
 
 let lists = ref(null)
-let load = false
 import { ref } from 'vue'
 import { useMovieStores } from '../stores/MoviesStore'
 const store = useMovieStores()
 lists.value = store.supabase
-load = true
-const remove = async () => {
-  // let index = lists.findIndex((el) => el.name === )
-  // console.log(index)
+const upvote = function (event) {
+  event.preventDefault()
+  console.log()
 }
 </script>
 
