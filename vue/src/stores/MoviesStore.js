@@ -6,7 +6,8 @@ export const useMovieStores = defineStore('MovieStore', {
       supabase: null,
       email: null,
       password: null,
-      loggedin: true
+      loggedin: true,
+      reviewGiven: false
     }
   },
   actions: {

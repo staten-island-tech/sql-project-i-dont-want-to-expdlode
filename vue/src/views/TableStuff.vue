@@ -1,12 +1,16 @@
 <template>
   <div v-if="store.loggedin" class="container">
     <div id="card" v-for="list in lists" :key="list.id">
-      <h1>{{ list.id }}</h1>
       <h2>{{ list.title }}</h2>
       <h3>{{ list.release }}</h3>
-      <form>
-        <input type="text" />
-        <input type="submit" value="Review" @click="upvote" />
+      <form v-if="store.reviewGiven === false">
+        <div>
+          <input class="answer" type="text" />
+        </div>
+        <input type="submit" value="Review" @click="review" />
+      </form>
+      <form v-else>
+        <h4>You can't make more reviews nerd</h4>
       </form>
     </div>
   </div>
@@ -27,9 +31,16 @@ import { ref } from 'vue'
 import { useMovieStores } from '../stores/MoviesStore'
 const store = useMovieStores()
 lists.value = store.supabase
-const upvote = function (event) {
+const review = async function (event) {
   event.preventDefault()
-  console.log()
+  const review = document.querySelector('.answer')
+  console.log(review.value)
+  store.$patch({
+    reviewGiven: true
+  })
+  const { data, error } = await supabase
+    .from('reviews')
+    .insert([{ film: data.title, other_column: error.user }])
 }
 </script>
 
