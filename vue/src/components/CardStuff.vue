@@ -8,6 +8,7 @@
 </template>
 
 <script>
+// import { lists } from '../views/TableStuff.vue'
 export default {
   name: 'CardStuff',
   props: {

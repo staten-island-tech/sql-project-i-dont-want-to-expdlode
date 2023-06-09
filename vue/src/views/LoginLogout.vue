@@ -41,15 +41,24 @@ export default {
   <form @submit.prevent="signInWithEmail">
     <h1>Login</h1>
     <div class="">
-      <label for="email" class="">Email</label>
+      <label for="email" class="">Email: </label>
       <input type="text" required class="" id="email" v-model="email" />
     </div>
 
     <div class="">
-      <label for="password" class="">Password</label>
+      <label for="password" class="">Password: </label>
       <input type="password" required class="" id="password" v-model="password" />
     </div>
     <button type="submit" class="">Login</button>
   </form>
   <button @click="signOut">Sign Out</button>
 </template>
+
+<style scoped>
+div {
+  color: white;
+}
+h1 {
+  color: white;
+}
+</style>

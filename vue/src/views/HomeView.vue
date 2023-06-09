@@ -6,10 +6,12 @@ function useCurrentUser() {}
 const useCurrentUserStore = defineStore(currentUser, useCurrentUser)
 console.log(useCurrentUserStore)
 </script>
-//view = declarative rendering of the state, getters = computed properties , //actions = asynchronus
-operations and ways to change the state,//state = what is stored to influence the view //State
-management takes the same slot as components//
 
 <template>
-  <main></main>
+  <div><p>please dont fail us</p></div>
 </template>
+<style scoped>
+p {
+  color: white;
+}
+</style>

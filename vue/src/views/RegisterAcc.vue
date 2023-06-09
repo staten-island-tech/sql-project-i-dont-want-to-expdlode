@@ -52,17 +52,17 @@ export default {
       <h1 class="">Register</h1>
 
       <div class="">
-        <label for="email" class="">Email</label>
+        <label for="email" class="">Email: </label>
         <input type="text" required class="" id="email" v-model="email" />
       </div>
 
       <div class="">
-        <label for="password" class="">Password</label>
+        <label for="password" class="">Password: </label>
         <input type="password" required class="" id="password" v-model="password" />
       </div>
 
       <div class="">
-        <label for="confirmPassword" class="">Confirm Password</label>
+        <label for="confirmPassword" class="">Confirm Password: </label>
         <input type="password" required class="" id="confirmPassword" v-model="confirmPassword" />
       </div>
 
@@ -70,3 +70,9 @@ export default {
     </form>
   </div>
 </template>
+
+<style scoped>
+div {
+  color: white;
+}
+</style>
