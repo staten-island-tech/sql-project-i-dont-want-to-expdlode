@@ -38,9 +38,11 @@ const review = async function (event) {
   store.$patch({
     reviewGiven: true
   })
-  const { data, error } = await supabase
-    .from('reviews')
-    .insert([{ film: data.title, other_column: error.user }])
+  const title = store.supabase.title
+  const { data, error } = await supabase.from('reviews').insert([{ film: title, review: review }])
+  console.log(data)
+  console.log(error)
+  console.log(title)
 }
 </script>
 
